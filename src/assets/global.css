@@ -1,0 +1,93 @@
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 這裡把深色模式下的變數全部指回亮色值 */
+    --bulma-scheme-main: #ffffff;
+    --bulma-text: #4a4a4a;
+  }
+}
+/* 強化所有邊框，確保在任何模式下都有線條感 */
+.navbar,
+.card,
+.button,
+.input,
+.p-component {
+  border-color: #dbdbdb !important; /* Bulma 標准邊框色 */
+}
+:root {
+  /* 強制鎖定 PrimeVue 的表面顏色變數 */
+  --p-surface-0: #ffffff !important;
+  --p-surface-50: #f9fafb !important;
+  --p-surface-100: #f3f4f6 !important;
+  --p-content-background: #ffffff !important;
+  --p-text-color: #4b5563 !important;
+
+  /* 強制鎖定系統渲染模式 */
+  color-scheme: light !important;
+}
+
+/* 針對 Bulma 的核心容器進行「有層次的」補色 */
+html,
+body {
+  background-color: #ffffff !important; /* 底色一定要死守 */
+  color: #4a4a4a !important;
+}
+
+/* 確保 Navbar 展開時不是死白，而是有原本的陰影和背景 */
+.navbar {
+  background-color: #ffffff !important;
+}
+
+@media screen and (max-width: 1023px) {
+  .navbar-menu {
+    background-color: #ffffff !important;
+    /* 補回被吃掉的陰影，增加協調感 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+/* 1. 鎖定所有輸入框的基礎色調 */
+input,
+textarea,
+select,
+.input,
+.textarea,
+.select select {
+  background-color: #ffffff !important;
+  color: #363636 !important; /* Bulma 標准文字深色 */
+  border-color: #dbdbdb !important; /* 確保邊框線條存在，才不會死白一片 */
+  box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05) !important;
+}
+
+/* 2. 處理 Placeholder (佔位文字) 在深色模式下變白消失的問題 */
+input::placeholder,
+textarea::placeholder {
+  color: #7a7a7a !important;
+  opacity: 1; /* 防止某些瀏覽器自動降低透明度 */
+}
+
+/* 3. 針對 PrimeVue 的 Input 組件 (例如 InputText, Textarea) */
+.p-inputtext {
+  background: #ffffff !important;
+  color: #4b5563 !important;
+  border: 1px solid #d1d5db !important;
+}
+
+/* 4. 解決 Focus (點擊選取) 時的視覺不協調 */
+input:focus,
+.input:focus,
+.p-inputtext:focus {
+  border-color: #485fc7 !important; /* Bulma 的 link 顏色或你的主色 */
+  box-shadow: 0 0 0 0.125em rgba(72, 95, 199, 0.25) !important;
+}
+
+/* 針對 Bulma 的表單欄位容器 */
+.field,
+.control,
+.box,
+.card-content {
+  background-color: #ffffff; /* 不一定要用 !important，給予底色即可 */
+}
+
+label.label {
+  color: #363636 !important; /* 確保標籤文字是黑色的 */
+}

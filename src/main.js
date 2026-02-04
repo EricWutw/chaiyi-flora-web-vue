@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import '@/assets/global.css'
 import App from './App.vue'
 import router from './router'
 import { createPinia } from 'pinia'
@@ -8,6 +9,11 @@ import Aura from '@primevue/themes/aura' // 👈 必須引入這個預設主題
 import AnimateOnScroll from 'primevue/animateonscroll'
 // main.js 補上這一行
 import 'primeicons/primeicons.css'
+
+// 在 app.mount('#app') 之前執行
+const htmlElement = document.documentElement
+htmlElement.classList.remove('p-dark') // 移除 PrimeVue 可能誤加的 dark class
+htmlElement.style.colorScheme = 'light'
 
 const app = createApp(App)
 const pinia = createPinia()
