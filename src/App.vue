@@ -127,4 +127,24 @@ onUnmounted(() => {
 .line-color i {
   font-size: 2.2rem !important;
 }
+
+/* 強制將根元素的背景設為白色，這是針對 Bulma 與 Body 的補強 */
+html,
+body {
+  background-color: #ffffff !important;
+  color: #4a4a4a !important; /* Bulma 預設文字色 */
+}
+
+/* 確保 PrimeVue 元件在任何情況下都不會吃到深色變數 */
+:root {
+  --p-primary-color: #3b82f6; /* 舉例：確保你的主色調正確 */
+  color-scheme: light !important;
+}
+
+/* 由於 Bulma 沒有 darkModeSelector 這種設定，若手機版仍有黑色塊，通常是這裡出的問題 */
+.section,
+.container,
+.footer {
+  background-color: #ffffff !important;
+}
 </style>
