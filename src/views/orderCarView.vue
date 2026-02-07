@@ -2,7 +2,7 @@
   <div class="container mt-5 px-4" style="max-width: 800px">
     <div class="is-flex -content-center is-align-content-space-between">
       <div class="subtitle has-text-centered">購物清單</div>
-      <button>清空購物車</button>
+      <button>清空購物車(做到這裡)</button>
     </div>
     <hr />
     <div class="box p-0 shadow-sm">
