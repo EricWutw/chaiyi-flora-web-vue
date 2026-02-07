@@ -167,16 +167,6 @@
                 style="object-fit: cover"
               />
             </figure>
-
-            <button
-              class="button is-danger is-light rounded cart-float-btn"
-              @click.stop="handleAddOrder(product)"
-              title="加入購物車"
-            >
-              <span class="icon">
-                <i class="fa-solid fa-cart-plus"></i>
-              </span>
-            </button>
           </div>
 
           <div class="card-content">
@@ -185,7 +175,48 @@
                 <span class="tag is-info is-light is-small">{{ getTypeName(product.typeId) }}</span>
               </div>
               <p class="is-size-5 has-text-black has-text-weight-bold mb-1">{{ product.name }}</p>
-              <p class="has-text-weight-bold">NT$ {{ product.price }}</p>
+              <div
+                class="has-text-weight-bold is-flex is-align-items-center is-justify-content-space-between mt-3"
+                v-if="product.price > 0"
+              >
+                <div>購買產品：NT$ {{ product.price }}</div>
+
+                <button
+                  class="button is-danger is-light is-small"
+                  @click.stop="handleAddOrder(product, 'product', '購買產品', product.price)"
+                  title="加入購物車"
+                >
+                  <span><i class="fa-solid fa-cart-plus"></i> 產品 </span>
+                </button>
+              </div>
+              <div
+                class="has-text-weight-bold is-flex is-align-items-center is-justify-content-space-between mt-3"
+                v-if="product.classPrice > 0"
+              >
+                <div>體驗課：NT$ {{ product.classPrice }}</div>
+
+                <button
+                  class="button is-danger is-light is-small"
+                  @click.stop="handleAddOrder(product, 'class', '單堂體驗課', product.classPrice)"
+                  title="加入購物車"
+                >
+                  <span><i class="fa-solid fa-cart-plus"></i> 體驗課 </span>
+                </button>
+              </div>
+              <div
+                class="has-text-weight-bold is-flex is-align-items-center is-justify-content-space-between mt-3"
+                v-if="product.matetialPrice > 0"
+              >
+                <div>材料包：NT$ {{ product.matetialPrice }}</div>
+
+                <button
+                  class="button is-danger is-light is-small"
+                  @click.stop="handleAddOrder(product, 'material', '材料包', product.matetialPrice)"
+                  title="加入購物車"
+                >
+                  <span><i class="fa-solid fa-cart-plus"></i> 材料包 </span>
+                </button>
+              </div>
             </div>
 
             <button
@@ -246,10 +277,9 @@ const { productTypes } = storeToRefs(typeStore)
 const { products, pisLoading } = storeToRefs(productStore)
 
 // 當使用者點擊「加入購物車」按鈕
-const handleAddOrder = (product) => {
+const handleAddOrder = (product, type, label, price) => {
   // 1. 執行 Store 的動作
-  orderStore.addToCart(product)
-
+  orderStore.addToCart(product, type, label, price)
   // 2. (選用) 加入一點視覺回饋
   alert(`已將 ${product.name} 加入購物車！`)
 }
@@ -477,24 +507,6 @@ img {
 .product-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.cart-float-btn {
-  position: absolute;
-  bottom: 12px; /* 放在圖片右下角 */
-  right: 12px;
-  width: 45px;
-  height: 45px;
-  border: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  z-index: 10;
-
-  color: #4a4a4a !important;
-}
-
-.cart-float-btn:hover {
-  transform: scale(1.1);
-  background-color: #d4bc8d !important;
 }
 
 /* 確保圖片裁切一致 */

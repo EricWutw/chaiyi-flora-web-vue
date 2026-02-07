@@ -6,9 +6,12 @@
     </div>
     <hr />
     <div class="box p-0 shadow-sm">
+      <!-- 分類：購買產品 -->
+      <h1 class="subtitle has-text-centered" v-if="productItems.length > 0">產品</h1>
+      <hr />
       <div
-        v-for="(item, index) in cart"
-        :key="item.id"
+        v-for="(item, index) in productItems"
+        :key="item.id + item.optionType"
         class="product-item px-4 py-3"
         :class="{ 'border-top-line': index !== 0 }"
       >
@@ -27,6 +30,7 @@
             <h3 class="is-size-6-mobile is-size-5-tablet has-text-weight-bold mb-0">
               {{ item.name }}
             </h3>
+            <p class="is-size-7 has-text-info">{{ item.optionLabel }}</p>
             <p class="is-size-7-mobile">${{ item.price }} x {{ item.quantity }}</p>
           </div>
 
@@ -51,7 +55,123 @@
               <p class="control ml-1">
                 <button
                   class="button is-small-mobile is-danger is-light"
-                  @click="handleRemove(item.id, item.name)"
+                  @click="handleRemove(item.id, item.optionType, item.name)"
+                >
+                  <i class="pi pi-trash">{{ item.optionType }}</i>
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 分類：單堂體驗課 -->
+      <h1 class="subtitle has-text-centered" v-if="classItems.length > 0">課程</h1>
+      <hr />
+      <div
+        v-for="(item, index) in classItems"
+        :key="item.id + item.optionType"
+        class="product-item px-4 py-3"
+        :class="{ 'border-top-line': index !== 0 }"
+      >
+        <div class="columns is-vcentered is-mobile is-gapless-mobile">
+          <div class="column is-narrow p-2">
+            <figure class="image is-64x64-mobile is-96x96-tablet">
+              <img
+                :src="item.imageUrls[0]"
+                class="is-rounded-small"
+                style="object-fit: cover; height: 100%"
+              />
+            </figure>
+          </div>
+
+          <div class="column px-2">
+            <h3 class="is-size-6-mobile is-size-5-tablet has-text-weight-bold mb-0">
+              {{ item.name }}
+            </h3>
+            <p class="is-size-7 has-text-info">{{ item.optionLabel }}</p>
+            <p class="is-size-7-mobile">${{ item.price }} x {{ item.quantity }}</p>
+          </div>
+
+          <div class="column is-narrow">
+            <div class="field has-addons">
+              <p class="control">
+                <button
+                  class="button is-small-mobile is-light"
+                  @click="item.quantity > 1 ? item.quantity-- : null"
+                >
+                  <i class="pi pi-minus"></i>
+                </button>
+              </p>
+              <p class="control">
+                <a class="button is-small">{{ item.quantity }}</a>
+              </p>
+              <p class="control">
+                <button class="button is-small-mobile is-light" @click="item.quantity++">
+                  <i class="pi pi-plus"></i>
+                </button>
+              </p>
+              <p class="control ml-1">
+                <button
+                  class="button is-small-mobile is-danger is-light"
+                  @click="handleRemove(item.id, item.optionType, item.name)"
+                >
+                  <i class="pi pi-trash">{{ item.optionType }}</i>
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 分類：材料包 -->
+      <h1 class="subtitle has-text-centered" v-if="materialItems.length > 0">材料包</h1>
+      <hr />
+      <div
+        v-for="(item, index) in materialItems"
+        :key="item.id + item.optionType"
+        class="product-item px-4 py-3"
+        :class="{ 'border-top-line': index !== 0 }"
+      >
+        <div class="columns is-vcentered is-mobile is-gapless-mobile">
+          <div class="column is-narrow p-2">
+            <figure class="image is-64x64-mobile is-96x96-tablet">
+              <img
+                :src="item.imageUrls[0]"
+                class="is-rounded-small"
+                style="object-fit: cover; height: 100%"
+              />
+            </figure>
+          </div>
+
+          <div class="column px-2">
+            <h3 class="is-size-6-mobile is-size-5-tablet has-text-weight-bold mb-0">
+              {{ item.name }}
+            </h3>
+            <p class="is-size-7 has-text-info">{{ item.optionLabel }}</p>
+            <p class="is-size-7-mobile">${{ item.price }} x {{ item.quantity }}</p>
+          </div>
+
+          <div class="column is-narrow">
+            <div class="field has-addons">
+              <p class="control">
+                <button
+                  class="button is-small-mobile is-light"
+                  @click="item.quantity > 1 ? item.quantity-- : null"
+                >
+                  <i class="pi pi-minus"></i>
+                </button>
+              </p>
+              <p class="control">
+                <a class="button is-small">{{ item.quantity }}</a>
+              </p>
+              <p class="control">
+                <button class="button is-small-mobile is-light" @click="item.quantity++">
+                  <i class="pi pi-plus"></i>
+                </button>
+              </p>
+              <p class="control ml-1">
+                <button
+                  class="button is-small-mobile is-danger is-light"
+                  @click="handleRemove(item.id, item.optionType, item.name)"
                 >
                   <i class="pi pi-trash"></i>
                 </button>
@@ -60,7 +180,6 @@
           </div>
         </div>
       </div>
-
       <div class="p-4 has-background-white-bis has-text-right border-top-line">
         <span class="mr-4"
           >總計: <strong>${{ calculateTotal }}</strong></span
@@ -158,16 +277,26 @@ const handleSubmit = () => {
 const orderStore = useOrderStore()
 const { cart } = storeToRefs(orderStore)
 
+// 分類：購買產品
+const productItems = computed(() => cart.value.filter((item) => item.optionType === 'product'))
+
+// 分類：單堂體驗課
+const classItems = computed(() => cart.value.filter((item) => item.optionType === 'class'))
+
+// 分類：材料包
+const materialItems = computed(() => cart.value.filter((item) => item.optionType === 'material'))
+
 // 計算總金額
 const calculateTotal = computed(() => {
   return cart.value.reduce((total, item) => total + item.price * item.quantity, 0)
 })
 
 // 處理移除
-const handleRemove = (id, name) => {
-  // 實作你的移除邏輯
-  orderStore.removeFromCart(id)
-  confirm(`請確認是否移除 ${name}`)
+// 購物車 View 內
+const handleRemove = (id, type, name) => {
+  if (confirm(`確定要移除${type}「${name}」嗎？`)) {
+    orderStore.removeFromCart(id, type)
+  }
 }
 </script>
 

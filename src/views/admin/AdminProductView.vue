@@ -64,7 +64,7 @@
         </div>
         <div class="column">
           <div class="field">
-            <label for="price" class="label">價格</label>
+            <label for="price" class="label">成品價格</label>
             <div class="control">
               <input
                 v-model="productData.price"
@@ -77,6 +77,36 @@
               />
             </div>
             <span v-if="error.price" class="help is-danger">{{ error.price }}</span>
+          </div>
+          <div class="field">
+            <label for="classPrice" class="label">單堂課價格</label>
+            <div class="control">
+              <input
+                v-model="productData.classPrice"
+                id="classPrice"
+                class="input"
+                type="number"
+                placeholder="請輸入價格"
+                min="0"
+                step="1"
+              />
+            </div>
+            <span v-if="error.price" class="help is-danger">{{ error.classPrice }}</span>
+          </div>
+          <div class="field">
+            <label for="matetialPrice" class="label">材料包價格</label>
+            <div class="control">
+              <input
+                v-model="productData.matetialPrice"
+                id="matetialPrice"
+                class="input"
+                type="number"
+                placeholder="請輸入價格"
+                min="0"
+                step="1"
+              />
+            </div>
+            <span v-if="error.price" class="help is-danger">{{ error.matetialPrice }}</span>
           </div>
           <div class="field">
             <div class="control">
@@ -221,7 +251,13 @@
                 </span>
               </div>
               <p class="is-5">作品：{{ product.name }}</p>
-              <p class="has-text-danger has-text-weight-bold">價格：${{ product.price }}</p>
+              <p class="has-text-danger has-text-weight-bold">單買成品價格：${{ product.price }}</p>
+              <p class="has-text-danger has-text-weight-bold">
+                單堂體驗價格：${{ product.classPrice }}
+              </p>
+              <p class="has-text-danger has-text-weight-bold">
+                材料包價格：${{ product.matetialPrice }}
+              </p>
             </div>
 
             <div class="content mt-3">
@@ -262,6 +298,8 @@ const showModal = ref(false)
 const error = ref({
   name: '',
   price: 0,
+  classPrice: 0,
+  matetialPrice: 0,
   isOpen: true,
   typeId: '',
   description: '',
@@ -270,6 +308,8 @@ const error = ref({
 const productData = ref({
   name: '',
   price: 0,
+  classPrice: 0,
+  matetialPrice: 0,
   isOpen: true,
   typeId: '',
   description: '',
@@ -417,7 +457,14 @@ const closeModal = () => {
   showModal.value = false
   isEdit.value = false
   currentId.value = null
-  productData.value = { name: '', price: 0, isOpen: true, imageUrls: [] }
+  productData.value = {
+    name: '',
+    price: 0,
+    classPrice: 0,
+    matetialPrice: 0,
+    sOpen: true,
+    imageUrls: [],
+  }
   previewUrls.value = [] // 👈 務必清空
   selectedFiles.value = [] // 👈 務必清空
   error.value = { name: '' }
@@ -482,6 +529,11 @@ const Validate = () => {
     name: '',
     typeId: '',
     price: '',
+    classPrice: '',
+    matetialPrice: '',
+    isOpen: true,
+    description: '',
+    imageUrl: [],
   }
 
   let isValid = true
@@ -503,11 +555,35 @@ const Validate = () => {
   if (price === null || price === undefined || price === '') {
     error.value.price = '請輸入價格'
     isValid = false
-  } else if (price <= 0) {
+  } else if (price < 0) {
     error.value.price = '價格必須大於 0'
     isValid = false
   } else if (!Number.isInteger(Number(price))) {
     error.value.price = '價格必須是整數'
+    isValid = false
+  }
+  // 5. 檢查堂體驗價格：必須是大於 0 的整數
+
+  const classPrice = productData.value.classPrice
+  if (classPrice === null || classPrice === undefined || classPrice === '') {
+    error.value.classPrice = '請輸入價格'
+    isValid = false
+  } else if (classPrice < 0) {
+    error.value.classPrice = '價格必須大於 0'
+    isValid = false
+  } else if (!Number.isInteger(Number(classPrice))) {
+    error.value.classPrice = '價格必須是整數'
+    isValid = false
+  }
+  const matetialPrice = productData.value.matetialPrice
+  if (matetialPrice === null || matetialPrice === undefined || matetialPrice === '') {
+    error.value.matetialPrice = '請輸入價格'
+    isValid = false
+  } else if (matetialPrice < 0) {
+    error.value.matetialPrice = '價格必須大於 0'
+    isValid = false
+  } else if (!Number.isInteger(Number(matetialPrice))) {
+    error.value.matetialPrice = '價格必須是整數'
     isValid = false
   }
 

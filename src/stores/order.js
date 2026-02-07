@@ -22,22 +22,31 @@ export const useOrderStore = defineStore('order', () => {
     return cart.value.reduce((total, item) => total + (item.quantity || 1), 0)
   })
 
-  const addToCart = (product) => {
-    // 檢查購物車是否已經有這件商品
-    const existingItem = cart.value.find((item) => item.id === product.id)
+  // stores/order.js
+  const addToCart = (product, type, label, price) => {
+    // 檢查購物車：必須 ID 相同且類型(type)也相同，才算同一件商品
+    const existingItem = cart.value.find(
+      (item) => item.id === product.id && item.optionType === type,
+    )
 
     if (existingItem) {
-      // 如果已有，數量 +1
       existingItem.quantity++
     } else {
-      // 如果沒有，把商品加進去並設定初始數量為 1
-      cart.value.push({ ...product, quantity: 1 })
+      // 如果沒有，把商品資訊、選擇的類別與對應價格存進去
+      cart.value.push({
+        ...product,
+        optionType: type, // 存入 'product' / 'class' / 'material'
+        optionLabel: label, // 存入 '購買產品' / '單堂體驗課' / '材料包'
+        price: price, // 重要：存入該選項對應的價格，而不是原始 product.price
+        quantity: 1,
+      })
     }
   }
+
   // stores/order.js
-  const removeFromCart = (id) => {
-    // 找出所有 id 不等於目標 id 的商品，重新賦值給 cart
-    cart.value = cart.value.filter((item) => item.id !== id)
+  const removeFromCart = (id, type) => {
+    // 同時符合 ID 和 類型才過濾掉
+    cart.value = cart.value.filter((item) => !(item.id === id && item.optionType === type))
   }
 
   // 封裝監聽函式
