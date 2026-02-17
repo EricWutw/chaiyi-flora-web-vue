@@ -1,13 +1,13 @@
 <template>
   <div class="home-wrapper">
     <!-- 首頁第一段hero -->
+    <!-- https://media.istockphoto.com/id/820747276/photo/forget-me-not-.jpg?s=1024x1024&w=is&k=20&c=PH1ZDPITujkHMi97vjw4gOmNXJxzFYL6h6CQVPJdGWA= -->
     <section class="hero is-medium is-bold">
       <div
         class="hero-body"
         style="
           background-image:
-            linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-            url('https://media.istockphoto.com/id/820747276/photo/forget-me-not-macro.jpg?s=1024x1024&w=is&k=20&c=PH1ZDPITujkHMi97vjw4gOmNXJxzFYL6h6CQVPJdGWA=');
+            linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/扭扭棒.jpg);
           background-size: cover;
           background-position: center;
         "
@@ -38,20 +38,15 @@
       <div class="column is-1"></div>
       <div class="column is-flex is-justify-content-center is-align-items-center">
         <figure class="image is-256x256" v-animateonscroll="{ enterClass: 'animate-fadeIn' }">
-          <img
-            class="is-rounded"
-            src="https://media.istockphoto.com/id/2248013696/photo/daughter-giving-flowers-to-her-mother-at-home.jpg?s=1024x1024&w=is&k=20&c=V74pJ0k-xkXrC1qB3IJZgwX0bRWkTqgiLVfHZw2LYgo="
-          />
+          <img class="is-rounded" src="/扭扭棒1.jpg" />
         </figure>
       </div>
       <div class="column content has-text-centered is-align-content-center">
-        <h1>Hello World</h1>
+        <h1>毛茸茸扭扭棒娃娃的「領養」計畫</h1>
         <p>
-          Lorem ipsum<sup><a>[1]</a></sup> dolor sit amet, consectetur adipiscing elit. Nulla
-          accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh
-          eu lectus. Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum
-          mattis neque. Sub<sub>script</sub>
-          works as well!
+          生活再硬，也要活得夠軟！<br />
+          把「一根根毛茸茸線條」變身為「療癒小靈魂」的魔法實驗室。我們不賣現成的塑膠玩具，我們只賣「捏捏超能力」！
+          從一根平凡的毛根開始，透過手指的溫度與一點點「萌力邏輯」，你可以親手創造出各種讓嘴角失守的小怪獸、小動物，甚至是你的分身這群毛毛星人隨時準備好要用無辜的眼神，瞬間融化你的心。
         </p>
       </div>
       <div class="column is-1"></div>
@@ -63,19 +58,54 @@
         v-animateonscroll="{ enterClass: 'animate-slideInLeft' }"
       >
         <figure class="image is-256x256">
-          <img
-            class="is-rounded"
-            src="https://plus.unsplash.com/premium_photo-1676346983836-0e714952ba6d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8UHJlc2VydmVkJTIwRmxvd2VyfGVufDB8fDB8fHww"
-          />
+          <img class="is-rounded" src="/S__39223342.jpg " />
         </figure>
       </div>
 
       <div class="column is-5 content has-text-centered">
-        <h1 class="title is-2">采依花藝</h1>
-        <p class="is-size-5">
-          為生活，點亮溫度。<br />
-          在花綻的瞬間，遇見最溫暖的自己。<br />
-          把這份美好，分享給心上最重要的人。
+        <h1 class="is-2">押花滴膠飾品 的「時間暫停」魔法</h1>
+        <p class="">
+          生活太快，我們幫你按下的「暫停鍵」！<br />
+          把「最美瞬間」封印透明方塊裡。不賣量產的玻璃裝飾，只賣「收藏光影的超能力」！
+          從一片真實的花瓣開始，透過黃金比例的樹脂配方與一點點「浪漫邏輯」，你可以把原本會凋零的美好，鎖進這晶瑩剔透的異世界裡。不管是放在床頭刻下你的名字，還是讓陽光穿過花瓣映在牆上，這群「透明系守護者」準備好要用那透亮的靈魂，釋放生活煩惱。
+        </p>
+      </div>
+    </div>
+    <div class="columns container" style="margin-top: 50px">
+      <div class="column is-1"></div>
+      <div class="column is-flex is-justify-content-center is-align-items-center">
+        <figure class="image is-256x256" v-animateonscroll="{ enterClass: 'animate-fadeIn' }">
+          <img class="is-rounded" src="/水晶花.jpg" />
+        </figure>
+      </div>
+      <div class="column content has-text-centered is-align-content-center">
+        <h1>歡迎光臨「透明水晶」夢幻花園</h1>
+        <p>
+          太悶，我們來點會發光的夢幻氛圍！<br />
+          這裡不是普通的花店，而是一間專門把「空氣」與「光」變成花的魔法實驗室。我們不賣會枯萎的鮮花，我們只賣「永不凋零的玻璃心」！
+          從一根纖細的金屬線開始，透過精密的結構塑形與液態樹脂的「表面張力魔法」，你可以親手創造出各種讓陽光都忌妒的晶瑩花朵。不管是掛在窗邊捕捉七彩光影，還是放在桌上當作「假裝很專業」的藝術品，這群「透明系守護者」隨時準備好要用那透亮的身體，閃瞎你的生活煩惱。
+        </p>
+      </div>
+      <div class="column is-1"></div>
+    </div>
+
+    <div class="columns container is-vcentered is-reversed-desktop">
+      <div
+        class="column is-5 is-flex is-justify-content-center"
+        v-animateonscroll="{ enterClass: 'animate-slideInLeft' }"
+      >
+        <figure class="image is-256x256">
+          <img class="is-rounded" src="/永生花.jpg" />
+        </figure>
+      </div>
+
+      <div class="column is-5 content has-text-centered">
+        <h1 class="is-2">永生花與不凋花的「凍齡傳說」</h1>
+        <p class="">
+          誰說美麗一定要凋謝？我們偏要它「長生不老」！<br />
+          我們不賣那些幾天就垂頭喪氣的鮮花，我們只賣「永遠維持在顏值巔峰」的植物界超能力者！
+          這群「不凋花」原本也是嬌嫩的鮮花，但在它們最美的那一秒，我們啟動了特殊的科學置換程序，把植物細胞裡的水分通通換成保鮮精華，
+          它們隨時準備好要在你的房間裡「定格美貌」，陪你度過每一個不想澆水的懶惰午後。
         </p>
       </div>
     </div>
